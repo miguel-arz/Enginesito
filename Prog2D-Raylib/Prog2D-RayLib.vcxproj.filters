@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="platforms">
+      <UniqueIdentifier>{FDCC2FD5-6937-E44B-B275-95F11E1FC2A0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Prog2D-Raylib\config.h" />
+    <ClInclude Include="Source\Prog2D-Raylib\raylib.h" />
+    <ClInclude Include="Source\Prog2D-Raylib\raymath.h" />
+    <ClInclude Include="Source\Prog2D-Raylib\rcamera.h" />
+    <ClInclude Include="Source\Prog2D-Raylib\rgestures.h" />
+    <ClInclude Include="Source\Prog2D-Raylib\rlgl.h" />
+    <ClInclude Include="Source\Prog2D-Raylib\utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Prog2D-Raylib\platforms\rcore_desktop_glfw.c">
+      <Filter>platforms</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Prog2D-Raylib\raudio.c" />
+    <ClCompile Include="Source\Prog2D-Raylib\rcore.c" />
+    <ClCompile Include="Source\Prog2D-Raylib\rglfw.c" />
+    <ClCompile Include="Source\Prog2D-Raylib\rmodels.c" />
+    <ClCompile Include="Source\Prog2D-Raylib\rshapes.c" />
+    <ClCompile Include="Source\Prog2D-Raylib\rtext.c" />
+    <ClCompile Include="Source\Prog2D-Raylib\rtextures.c" />
+    <ClCompile Include="Source\Prog2D-Raylib\utils.c" />
+  </ItemGroup>
+</Project>

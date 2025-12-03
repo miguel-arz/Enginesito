@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Prog2D-App", "Prog2D-App\Prog2D-App.vcxproj", "{618D293B-4D45-6B88-B64C-44E4A2230679}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Prog2D-RayLib", "Prog2D-RayLib", "{4A618F5B-B6C2-6C69-3F30-B31BAB90A328}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Prog2D-RayLib", "Prog2D-RayLib\Prog2D-RayLib.vcxproj", "{8321AE4A-EFE1-2981-B81C-73FE249C6E5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Dist|x64 = Dist|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{618D293B-4D45-6B88-B64C-44E4A2230679}.Debug|x64.ActiveCfg = Debug|x64
+		{618D293B-4D45-6B88-B64C-44E4A2230679}.Debug|x64.Build.0 = Debug|x64
+		{618D293B-4D45-6B88-B64C-44E4A2230679}.Dist|x64.ActiveCfg = Dist|x64
+		{618D293B-4D45-6B88-B64C-44E4A2230679}.Dist|x64.Build.0 = Dist|x64
+		{618D293B-4D45-6B88-B64C-44E4A2230679}.Release|x64.ActiveCfg = Release|x64
+		{618D293B-4D45-6B88-B64C-44E4A2230679}.Release|x64.Build.0 = Release|x64
+		{8321AE4A-EFE1-2981-B81C-73FE249C6E5D}.Debug|x64.ActiveCfg = Debug|x64
+		{8321AE4A-EFE1-2981-B81C-73FE249C6E5D}.Debug|x64.Build.0 = Debug|x64
+		{8321AE4A-EFE1-2981-B81C-73FE249C6E5D}.Dist|x64.ActiveCfg = Dist|x64
+		{8321AE4A-EFE1-2981-B81C-73FE249C6E5D}.Dist|x64.Build.0 = Dist|x64
+		{8321AE4A-EFE1-2981-B81C-73FE249C6E5D}.Release|x64.ActiveCfg = Release|x64
+		{8321AE4A-EFE1-2981-B81C-73FE249C6E5D}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8321AE4A-EFE1-2981-B81C-73FE249C6E5D} = {4A618F5B-B6C2-6C69-3F30-B31BAB90A328}
+	EndGlobalSection
+EndGlobal
