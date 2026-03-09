@@ -1,0 +1,7 @@
+<CActionList>
+    <CAction Value="resources/orkito/actions/idle.act" />
+    <CAction Value="resources/orkito/actions/walk_right.act" />
+    <CAction Value="resources/orkito/actions/walk_left.act" />
+    <CAction Value="resources/orkito/actions/walk_up.act" />
+    <CAction Value="resources/orkito/actions/walk_down.act" />
+</CActionList>

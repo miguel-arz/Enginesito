@@ -1,7 +1,13 @@
 #include "Entity.h"
+#include "Level.h"
+#include "Components/Render/SpriteRendererComponent.h"
+#include "Components/Animation/AnimationComponent.h"
 
 CEntity::CEntity()
+	/*m_vPos(Vector2Zero()),
+	m_fRot(0.f)*/
 {
+	
 	m_tComponents.reserve(20);
 }
 
@@ -19,18 +25,46 @@ CEntity::~CEntity()
 	m_tComponents.clear();
 }
 
-void CEntity::Initialize()
+void CEntity::Configure()
+{
+
+	for (CComponent* pComp : m_tComponents)
+	{
+		pComp->Configure();
+	}
+
+	/*pugi::xml_node oRootNode = _oDoc.first_child();
+	GET_VARIABLE(string, m_sName, sName, Value, "DefaultValue");
+
+	if (pugi::xml_node oNode = oRootNode.find_child([](const pugi::xml_node& _oNode) { return strcmp(_oNode.name(), "CSpriteRendererComponent") == 0;}))
+	{
+		CSpriteRendererComponent* pComp = AddComponent<CSpriteRendererComponent>();
+
+		if (pComp)
+		{
+			pComp->Configure(oNode);
+		}
+	}
+
+	if (pugi::xml_node oNode = oRootNode.find_child([](const pugi::xml_node& _oNode) { return strcmp(_oNode.name(), "CAnimationComponent") == 0;}))
+	{
+		CAnimationComponent* pComp = AddComponent<CAnimationComponent>();
+
+		if (pComp)
+		{
+			pComp->Configure(oNode);
+		}
+	}*/
+}
+void CEntity::BeginPlay()
 {
 	for (CComponent* pComp : m_tComponents)
 	{
 		if (pComp)
 		{
-			pComp->Initialize();
+			pComp->Awake();
 		}
 	}
-}
-void CEntity::BeginPlay()
-{
 	for (CComponent* pComp : m_tComponents)
 	{
 		if (pComp)
@@ -81,4 +115,8 @@ void CEntity::Delete()
 		}
 	}
 	m_tComponents.clear();
+	if (m_pEntityLevel)
+	{
+		m_pEntityLevel->RemoveEntity(this);
+	}
 }

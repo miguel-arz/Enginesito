@@ -1,0 +1,98 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "objetos.tsx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "1.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 45
+        },
+        "2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 3
+        },
+        "3.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 3
+        },
+        "FieldsTileset.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.5,
+            "scaleInEditor": 3
+        },
+        "MapFinal.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 299.66666666666663,
+                "y": 235.66666666666666
+            }
+        },
+        "Mapa.tmx": {
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 484,
+                "y": 356.5
+            }
+        },
+        "Tileset2.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.5,
+            "scaleInEditor": 3
+        },
+        "e.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 3
+        },
+        "ee2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 45
+        },
+        "objetos.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Users/Miguel/OneDrive - U-tad/Pg2D",
+    "last.externalTilesetPath": "C:/Users/Miguel/OneDrive - U-tad/Pg2D",
+    "last.imagePath": "C:/Users/Miguel/OneDrive - U-tad/Pg2D/assets/craftpix-net-504452-free-village-pixel-tileset-for-top-down-defense/2 Objects/7 House",
+    "map.height": 12,
+    "map.lastUsedExportFilter": "Archivos de mapas de Tiled (*.tmx *.xml)",
+    "map.lastUsedFormat": "tmx",
+    "map.width": 20,
+    "openFiles": [
+        "MapFinal.tmx",
+        "Tileset2.tsx",
+        "FieldsTileset.tsx",
+        "objetos.tsx"
+    ],
+    "project": "map.tiled-project",
+    "recentFiles": [
+        "MapFinal.tmx",
+        "Tileset2.tsx",
+        "FieldsTileset.tsx",
+        "objetos.tsx",
+        "e.tsx",
+        "3.tsx",
+        "2.tsx",
+        "Mapa.tmx",
+        "1.tsx",
+        "ee2.tsx"
+    ],
+    "tileset.lastUsedFilter": "Archivos de conjuntos de patrones Tiled (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 7,
+        "width": 5
+    },
+    "tileset.type": 1
+}

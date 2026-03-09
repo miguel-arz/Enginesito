@@ -220,7 +220,7 @@ RMAPI float Wrap(float value, float min, float max)
 RMAPI int FloatEquals(float x, float y)
 {
 #if !defined(EPSILON)
-    #define EPSILON 0.000001f
+    #define EPSILON 0.00001f
 #endif
 
     int result = (fabsf(x - y)) <= (EPSILON*fmaxf(1.0f, fmaxf(fabsf(x), fabsf(y))));

@@ -1,0 +1,11 @@
+<CAction>
+	<sActionName Value="relax" />
+	<uPriority Value="0" />
+	<eOnActionFinished Value="Loop" />
+	<sNextAction Value="" />
+	<sTexturePath Value="resources/ethan/textures/ethan.png" />
+	<fMaxNumFrames Value="1" />
+	<tFrames>
+		<SFrames fDuration="0.0416666667" fU1="0.0" fV1="0.0" fU2="0.111111" fV2="0.111111" />
+	</tFrames>
+</CAction>

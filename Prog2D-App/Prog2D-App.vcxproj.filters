@@ -1,31 +1,106 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\Core\Entity.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Core\Component.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Core\GlobalDefines.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
+    <Filter Include="Components">
+      <UniqueIdentifier>{6B7DD516-5735-1764-C03C-F0BFAC13B254}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Animation">
+      <UniqueIdentifier>{1A382AD5-06C7-B39E-AFE5-C7999B53C444}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Animation\Action">
+      <UniqueIdentifier>{6732FC47-D33F-2A2E-5C26-2619C832F6E4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Controller">
+      <UniqueIdentifier>{1E7072D6-8ADC-2DD1-53D0-C52EBFFB4F39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Render">
+      <UniqueIdentifier>{7AB54442-E6CB-42D8-2F43-CEF99B981360}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Render\TileMap">
+      <UniqueIdentifier>{554B7264-C10D-A6EE-0ABE-347B76BF7ECC}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Core">
-      <UniqueIdentifier>{f4578246-cf30-42aa-8a6a-39d2bae282ba}</UniqueIdentifier>
+      <UniqueIdentifier>{2EB4837C-1AEB-840D-C3D7-6A10AFED000F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{C5BB87CE-B15D-B2A4-9A18-C6F8865939F5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Core\Entity.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="Source\Components\Animation\Action\Action.h">
+      <Filter>Components\Animation\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Components\Animation\AnimationComponent.h">
+      <Filter>Components\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Components\Controller\ControllerComponent.h">
+      <Filter>Components\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Components\IncludeComponents.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Components\Render\SpriteRendererComponent.h">
+      <Filter>Components\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Components\Render\TileMap\TileMapRendererComponent.h">
+      <Filter>Components\Render\TileMap</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Component.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Entity.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\GlobalDefines.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\Level.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Singleton.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\RenderEngine.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\RenderItem.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Components\Animation\Action\Action.cpp">
+      <Filter>Components\Animation\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Components\Animation\AnimationComponent.cpp">
+      <Filter>Components\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Components\Controller\ControllerComponent.cpp">
+      <Filter>Components\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Components\Render\SpriteRendererComponent.cpp">
+      <Filter>Components\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Components\Render\TileMap\TileMapRendererComponent.cpp">
+      <Filter>Components\Render\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Component.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Entity.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\GlobalDefines.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Level.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\pugixml.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render\RenderEngine.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\main.cpp" />
   </ItemGroup>
 </Project>

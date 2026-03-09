@@ -1,0 +1,18 @@
+<CEntity>
+    <sName value="map" />
+    <tComponents>
+        <CComponent sType="SpriteRendererComponent">
+            <vColor r="255" g="255" b="255" a="255" />
+            <eBlendMode value="ALPHA" />
+            <vUVs fU1="0.0" fV1="0.0" fU2="1.0" fV2="1.0" />
+            <fSize fWidth="800.0" fHeight="512.0" />
+            <fPivot fX="0.0" fY="0.0" />
+            <uLayer value="0" />
+            <sTexturePath value="resources/maps/textures/background.png" />
+        </CComponent>
+        <CComponent sType="TilemapRendererComponent">
+            <sMapPath value="resources/maps/map.lv" />
+            <uLayer value="10" />
+        </CComponent>
+    </tComponents>
+</CEntity>

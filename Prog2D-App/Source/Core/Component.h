@@ -1,9 +1,11 @@
 #pragma once
 #include "Core/GlobalDefines.h"
+#include "Core/pugixml.hpp"
 class CEntity;
 class CComponent
 {
 public:
+
 	CComponent()
 		: m_pEntity(nullptr),
 		m_uPriority(0u)
@@ -16,15 +18,14 @@ public:
 	};
 	CComponent(unsigned int _uPriority)
 		: m_pEntity(nullptr),
-		m_uPriority(0u)
-	{
+		m_uPriority(_uPriority)
+	{	
 	};
 	CComponent(CEntity* _pEntity, unsigned int _uPriority)
 		: m_pEntity(_pEntity),
 		m_uPriority(_uPriority)
 	{
 	};
-
 
 
 	virtual ~CComponent()
@@ -39,7 +40,12 @@ public:
 	void SetPriority(unsigned int _uPriority) { m_uPriority = _uPriority; }
 
 	virtual void Initialize() {};
+	virtual void Configure() {};
+	virtual void Awake() {};
 	virtual void BeginPlay() {};
+	
+
+
 
 	virtual void PrePhyshics(float _fTimeStep) {UNUSED_VARIABLE (_fTimeStep)};
 	virtual void PostPhyshics(float _fTimeStep) { UNUSED_VARIABLE(_fTimeStep) };

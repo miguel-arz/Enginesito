@@ -1,12 +1,2 @@
-﻿  Component.cpp
-  Entity.cpp
-  GlobalDefines.cpp
-  main.cpp
-C:\Users\miguel.ariza\OneDrive - U-tad\PG2D\Prog2D-25-26-main\Prog2D-App\Source\main.cpp(105,40): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\miguel.ariza\OneDrive - U-tad\PG2D\Prog2D-25-26-main\Prog2D-App\Source\main.cpp(106,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\miguel.ariza\OneDrive - U-tad\PG2D\Prog2D-25-26-main\Prog2D-App\Source\main.cpp(111,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\miguel.ariza\OneDrive - U-tad\PG2D\Prog2D-25-26-main\Prog2D-App\Source\main.cpp(112,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\miguel.ariza\OneDrive - U-tad\PG2D\Prog2D-25-26-main\Prog2D-App\Source\main.cpp(119,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\miguel.ariza\OneDrive - U-tad\PG2D\Prog2D-25-26-main\Prog2D-App\Source\main.cpp(120,33): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
-  Prog2D-App.vcxproj -> C:\Users\miguel.ariza\OneDrive - U-tad\PG2D\Prog2D-25-26-main\Binaries\windows-x86_64\Debug\Prog2D-App\Prog2D-App.exe
+﻿  main.cpp
+  Prog2D-App.vcxproj -> C:\Users\Miguel\OneDrive - U-tad\Documents\GitHub\Enginesito\Binaries\windows-x86_64\Debug\Prog2D-App\Prog2D-App.exe

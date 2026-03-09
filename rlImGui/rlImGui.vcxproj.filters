@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="extras">
+      <UniqueIdentifier>{f30d2987-4067-49f8-ac3c-5294e582db4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGui Files">
+      <UniqueIdentifier>{3fcff991-e084-4349-ab10-7ecb0bebe251}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Prog2D-rlImGui\rlImGui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Desktop\rlImGui-main\imgui-docking\imgui.cpp">
+      <Filter>ImGui Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Desktop\rlImGui-main\imgui-docking\imgui_demo.cpp">
+      <Filter>ImGui Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Desktop\rlImGui-main\imgui-docking\imgui_draw.cpp">
+      <Filter>ImGui Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Desktop\rlImGui-main\imgui-docking\imgui_tables.cpp">
+      <Filter>ImGui Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Desktop\rlImGui-main\imgui-docking\imgui_widgets.cpp">
+      <Filter>ImGui Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Prog2D-rlImGui\imgui_impl_raylib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Prog2D-rlImGui\rlImGui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Prog2D-rlImGui\rlImGuiColors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\rlImGui-main\extras\FA6FreeSolidFontData.h">
+      <Filter>extras</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\rlImGui-main\extras\IconsFontAwesome6.h">
+      <Filter>extras</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\rlImGui-main\imgui-docking\imconfig.h">
+      <Filter>ImGui Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\rlImGui-main\imgui-docking\imgui.h">
+      <Filter>ImGui Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\rlImGui-main\imgui-docking\imgui_internal.h">
+      <Filter>ImGui Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\rlImGui-main\imgui-docking\imstb_rectpack.h">
+      <Filter>ImGui Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\rlImGui-main\imgui-docking\imstb_textedit.h">
+      <Filter>ImGui Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\rlImGui-main\imgui-docking\imstb_truetype.h">
+      <Filter>ImGui Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

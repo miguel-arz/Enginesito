@@ -141,20 +141,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Components\Animation\Action\Action.h" />
+    <ClInclude Include="Source\Components\Animation\AnimationComponent.h" />
+    <ClInclude Include="Source\Components\Controller\ControllerComponent.h" />
+    <ClInclude Include="Source\Components\IncludeComponents.h" />
+    <ClInclude Include="Source\Components\Render\SpriteRendererComponent.h" />
+    <ClInclude Include="Source\Components\Render\TileMap\TileMapRendererComponent.h" />
+    <ClInclude Include="Source\Core\Component.h" />
+    <ClInclude Include="Source\Core\Entity.h" />
+    <ClInclude Include="Source\Core\GlobalDefines.h" />
+    <ClInclude Include="Source\Core\Level.h" />
+    <ClInclude Include="Source\Core\Singleton.h" />
+    <ClInclude Include="Source\Render\RenderEngine.h" />
+    <ClInclude Include="Source\Render\RenderItem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Components\Animation\Action\Action.cpp" />
+    <ClCompile Include="Source\Components\Animation\AnimationComponent.cpp" />
+    <ClCompile Include="Source\Components\Controller\ControllerComponent.cpp" />
+    <ClCompile Include="Source\Components\Render\SpriteRendererComponent.cpp" />
+    <ClCompile Include="Source\Components\Render\TileMap\TileMapRendererComponent.cpp" />
     <ClCompile Include="Source\Core\Component.cpp" />
     <ClCompile Include="Source\Core\Entity.cpp" />
     <ClCompile Include="Source\Core\GlobalDefines.cpp" />
+    <ClCompile Include="Source\Core\Level.cpp" />
+    <ClCompile Include="Source\Core\pugixml.cpp" />
+    <ClCompile Include="Source\Render\RenderEngine.cpp" />
     <ClCompile Include="Source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Prog2D-RayLib\Prog2D-RayLib.vcxproj">
       <Project>{8321AE4A-EFE1-2981-B81C-73FE249C6E5D}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Source\Core\Component.h" />
-    <ClInclude Include="Source\Core\Entity.h" />
-    <ClInclude Include="Source\Core\GlobalDefines.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
