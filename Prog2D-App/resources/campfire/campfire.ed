@@ -1,0 +1,18 @@
+<CEntity>
+    <sName value="campfire" />
+    <tComponents>
+	<CComponent sType="SpriteRendererComponent">
+		<vColor r="255" g="255" b="255" a="255" />
+		<eBlendMode value="ALPHA" />
+		<vUVs fU1="0.0" fV1="0.0" fU2="0.1666667" fV2="1.0" />
+		<fSize fWidth="48.0" fHeight="48.0" />
+		<fPivot fX="0.5" fY="0.5" />
+		<uLayer value="100" />
+		<sTexturePath value="resources/campfire/textures/Idle.png" />
+	</CComponent>
+	<CComponent sType="AnimationComponent">
+            <sActionList value="resources/campfire/campfire.actl" />
+            <sDefaultAction value="idle" />
+        </CComponent>
+    </tComponents>
+</CEntity>

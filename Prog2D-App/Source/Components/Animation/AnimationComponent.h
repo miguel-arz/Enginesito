@@ -3,6 +3,7 @@
 #include "Core/GlobalDefines.h"
 #include "Core/Entity.h"
 #include "Components/Animation/Action/Action.h"
+#include <list>
 
 class CAnimationComponent : public CComponent
 {
@@ -39,7 +40,7 @@ public:
 
 	const CAction* GetCurrentAction() const { return m_pCurrentAction; }
 
-	typedef std::vector<CAction> TActions;
+	typedef std::list<CAction> TActions;
 
 private:
 

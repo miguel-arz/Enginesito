@@ -41,6 +41,7 @@ int main(void)
   }
 
   oLevels.EndPlay();
+
   oLevels.Delete();
 
   CRenderEngine::GetInstance()->DeleteRenderer();

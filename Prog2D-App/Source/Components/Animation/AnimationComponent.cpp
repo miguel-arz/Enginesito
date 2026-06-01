@@ -1,7 +1,6 @@
 #include "AnimationComponent.h"
 #include "Core/Entity.h"
 #include "Components/Render/SpriteRendererComponent.h"
-#include <vector>
 
 CAnimationComponent::CAnimationComponent()
 	: Super(2u)
@@ -9,80 +8,58 @@ CAnimationComponent::CAnimationComponent()
 }
 
 CAnimationComponent::CAnimationComponent(const pugi::xml_node& oRoot)
+	: Super(2u)
 {
 	const char* sActionList{ nullptr };
 	GET_VARIABLE_VALUE(string, sActionList, sActionList, nullptr);
+
 	if (sActionList)
 	{
 		START_DESERIALIZATION(sActionList, oActionListDoc, CActionList, .actl)
 
-			for (pugi::xml_node oNode = oRoot.first_child(); oNode; oNode = oNode.next_sibling())
+			for (pugi::xml_node oActionListNode = oRoot.first_child();
+				oActionListNode;
+				oActionListNode = oActionListNode.next_sibling())
+		{
+			const char* sActionPath{ nullptr };
+
+			if (pugi::xml_attribute oValue = oActionListNode.attribute("value"))
 			{
-				const char* sActionPath{ nullptr };
-				GET_ATTRIBUTE(string, sActionPath, value, nullptr);
-				if (sActionPath)
-				{
-					START_DESERIALIZATION(sActionPath, oActionDoc, CAction, .act)
+				sActionPath = oValue.as_string();
+			}
 
-						m_tActions.emplace_back(oRoot);
+			if (sActionPath && strlen(sActionPath) > 0)
+			{
+				START_DESERIALIZATION(sActionPath, oActionDoc, CAction, .act)
 
-					END_DESERIALIZATION("ACTION LIST ERROR")
-				}
-			};
+					m_tActions.emplace_back(oRoot);
+
+				END_DESERIALIZATION("ACTION ERROR")
+			}
+		}
 
 		END_DESERIALIZATION("ACTION LIST ERROR")
 	}
 
 	const char* sDefaultAction{ nullptr };
 	GET_VARIABLE_VALUE(string, sDefaultAction, sDefaultAction, nullptr);
+
 	if (sDefaultAction)
 	{
-		for (CAction& oAction : m_tActions)
-		{
-			if (oAction.GetActionName().compare(sDefaultAction) == 0)
-			{
-				m_pDefaultAction = &oAction;
-				break;
-			}
-		}
+		m_sDefaultActionName = sDefaultAction;
+		m_pDefaultAction = GetAction(m_sDefaultActionName);
 	}
 }
 
 void CAnimationComponent::Initialize()
 {
 	Super::Initialize();
-	/*m_tActions.clear();
-	m_tActions.reserve(13u);
-
-	m_pDefaultAction = nullptr;*/
-
 }
 
 void CAnimationComponent::Configure()
 {
 	Super::Configure();
-	/*pugi::xml_node& oRootNode = _rNode;
-
-	GET_VARIABLE_VALUE(string, m_sDefaultActionName, sDefaultAction, "");
-
-	std::string sActionList;
-	GET_VARIABLE_VALUE(string, sActionList, sActionList, "");
-
-	pugi::xml_document oDoc;
-	pugi::xml_parse_result oResult = oDoc.load_file("resources/orkito/orkito.actl");
-	if (oResult)
-	{
-		pugi::xml_node oListNode = oDoc.first_child();
-		ConfigureActionList(oListNode);
-	}
-	m_pDefaultAction =  GetAction(m_sDefaultActionName);*/
 }
-
-//void CAnimationComponent::ConfigureActionList(pugi::xml_node& _rNode)
-//{
-//	pugi::xml_node& oRootNode = _rNode;
-//	CREATE_COLLECTION(CAction, m_tActions, CAction);
-//}
 
 void CAnimationComponent::Awake()
 {
@@ -93,11 +70,11 @@ void CAnimationComponent::Awake()
 void CAnimationComponent::BeginPlay()
 {
 	Super::BeginPlay();
+
 	if (m_pDefaultAction)
 	{
 		StartAction(m_pDefaultAction, true, 0.f);
 	}
-	
 }
 
 void CAnimationComponent::PrePhyshics(float _fTimeStep)
@@ -109,24 +86,51 @@ void CAnimationComponent::PostPhyshics(float _fTimeStep)
 {
 	Super::PostPhyshics(_fTimeStep);
 
-	if (m_pCurrentAction)
+	if (m_pCurrentAction == nullptr)
 	{
-		CAction::SUpdateResult oResult = m_pCurrentAction->Update(_fTimeStep);
-		if (oResult.bIsFinished)
-		{
-			EndAction(oResult.fExtraTime, false);
-		}
+		return;
 	}
-	if (CSpriteRendererComponent* pSpriteComp = m_pEntity->GetComponent<CSpriteRendererComponent>())
-	{
-		if (pSpriteComp->GetTexture() != m_pCurrentAction->GetTexture())
-		{
-			pSpriteComp->SetTexture(m_pCurrentAction->GetTexture());
-		}
-		const CAction::SFrame& rInfo = m_pCurrentAction->GetCurrentFrameInfo();
-		pSpriteComp->SetUVs(rInfo.vUVs);
 
+	CAction::SUpdateResult oResult = m_pCurrentAction->Update(_fTimeStep);
+
+	if (oResult.bIsFinished)
+	{
+		EndAction(oResult.fExtraTime, false);
 	}
+
+	if (m_pCurrentAction == nullptr)
+	{
+		return;
+	}
+
+	CSpriteRendererComponent* pSpriteComp = m_pEntity
+		? m_pEntity->GetComponent<CSpriteRendererComponent>()
+		: nullptr;
+
+	if (pSpriteComp == nullptr)
+	{
+		return;
+	}
+
+	Texture* pActionTexture = m_pCurrentAction->GetTexture();
+
+	if (pActionTexture == nullptr || pActionTexture->id == 0)
+	{
+		return;
+	}
+
+	if (pSpriteComp->GetTexture() != pActionTexture)
+	{
+		pSpriteComp->SetTexture(pActionTexture);
+	}
+
+	if (m_pCurrentAction->GetNumFrames() == 0)
+	{
+		return;
+	}
+
+	const CAction::SFrame& rInfo = m_pCurrentAction->GetCurrentFrameInfo();
+	pSpriteComp->SetUVs(rInfo.vUVs);
 }
 
 void CAnimationComponent::EndPlay()
@@ -134,80 +138,102 @@ void CAnimationComponent::EndPlay()
 	Super::EndPlay();
 }
 
-
 void CAnimationComponent::Delete()
 {
 	Super::Delete();
 
+	m_pCurrentAction = nullptr;
+	m_pDefaultAction = nullptr;
 	m_tActions.clear();
-	
 }
 
-CAction* CAnimationComponent::GetAction(const std::string& _sActionName) 
+CAction* CAnimationComponent::GetAction(const std::string& _sActionName)
 {
-	CAction* pAction = nullptr;
-	unsigned int uSize = static_cast<unsigned int>(m_tActions.size());
-	for (unsigned int i = 0u;i < uSize; ++i)
+	for (CAction& oAction : m_tActions)
 	{
-		if (m_tActions[i].GetActionName() == _sActionName)
+		if (oAction.GetActionName() == _sActionName)
 		{
-			pAction = &m_tActions[i];
+			return &oAction;
 		}
 	}
-	return pAction;
+
+	return nullptr;
 }
 
 bool CAnimationComponent::CanSetAction(CAction* _pAction)
 {
-	bool bCanInsert(false);
-	if (_pAction)
+	if (_pAction == nullptr)
 	{
-		bCanInsert = !m_pCurrentAction || _pAction->GetPriority() >= m_pCurrentAction->GetPriority();
+		return false;
 	}
 
-	return bCanInsert;
-}
+	if (m_pCurrentAction == nullptr)
+	{
+		return true;
+	}
 
+	return _pAction->GetPriority() >= m_pCurrentAction->GetPriority();
+}
 
 void CAnimationComponent::StartAction(const std::string& _sActionName, bool _bForce, float _fStartTime)
 {
 	CAction* pNewAction = GetAction(_sActionName);
-	StartAction(pNewAction, _bForce);
+	StartAction(pNewAction, _bForce, _fStartTime);
 }
 
-void CAnimationComponent::StartAction(CAction* _pNewAction, bool _bForce, float _fStartTime  /*=0.f*/)
+void CAnimationComponent::StartAction(CAction* _pNewAction, bool _bForce, float _fStartTime)
 {
+	if (_pNewAction == nullptr)
+	{
+		return;
+	}
+
+	if (m_pCurrentAction == _pNewAction)
+	{
+		return;
+	}
+
 	bool bCanInsert = _bForce || CanSetAction(_pNewAction);
 
-	if (_pNewAction && bCanInsert)
+	if (!bCanInsert)
 	{
-		m_pCurrentAction = _pNewAction;
-		m_pCurrentAction->Start(_fStartTime);
+		return;
 	}
+
+	m_pCurrentAction = _pNewAction;
+	m_pCurrentAction->Start(_fStartTime);
 }
 
 void CAnimationComponent::EndAction(float _fExtraTime, bool _bForceDefault)
 {
+	if (m_pCurrentAction == nullptr)
+	{
+		return;
+	}
+
 	switch (m_pCurrentAction->GetOnActionFinished())
 	{
 	case EOnActionFinished::ToDefault:
 	{
 		StartAction(m_pDefaultAction, true, _fExtraTime);
+		break;
 	}
-	break;
+
 	case EOnActionFinished::ToAction:
 	{
 		StartAction(m_pCurrentAction->GetNextAction(), true, _fExtraTime);
+		break;
 	}
-	break;
+
 	case EOnActionFinished::Freeze:
 	{
 		if (_bForceDefault)
 		{
 			StartAction(m_pDefaultAction, true, _fExtraTime);
 		}
+		break;
 	}
-	break;
+
 	case EOnActionFinished::Loop:
 	default:
 	{
@@ -215,10 +241,7 @@ void CAnimationComponent::EndAction(float _fExtraTime, bool _bForceDefault)
 		{
 			StartAction(m_pDefaultAction, true, _fExtraTime);
 		}
+		break;
 	}
-	break;
 	}
 }
-
-
-

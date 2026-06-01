@@ -1,6 +1,7 @@
 #include "SpriteRendererComponent.h"
 #include "Render/RenderEngine.h"
 #include "Core/Entity.h"
+#include <fstream>
 
 CSpriteRendererComponent::CSpriteRendererComponent() 
 	: Super(1u)
@@ -90,6 +91,11 @@ void CSpriteRendererComponent::Configure()
 	{
 		m_pTexture = CRenderEngine::GetInstance()->LoadTexture2D(m_sPath.c_str());
 	}
+
+	if (m_pTexture == nullptr)
+	{
+		TraceLog(LOG_WARNING, "SpriteRendererComponent without valid texture. Path: %s", m_sPath.c_str());
+	}
 }
 
 void CSpriteRendererComponent::Awake()
@@ -113,8 +119,12 @@ void CSpriteRendererComponent::EndPlay()
 void CSpriteRendererComponent::Delete()
 {
 	Super::Delete();
-	CRenderEngine::GetInstance()->UnloadTexture2D(m_pTexture);
+	
 	CRenderEngine::GetInstance()->RemoveRenderer(this);
+	m_pTexture = nullptr;
+
+	//CRenderEngine::GetInstance()->UnloadTexture2D(m_pTexture);
+	
 }
 
 void CSpriteRendererComponent::Draw()
@@ -132,9 +142,27 @@ void CSpriteRendererComponent::Draw()
 	}
 	EndBlendMode();*/
 
+	if (m_pTexture == nullptr)
+	{
+		return;
+	}
+
+	if (m_pTexture->id == 0)
+	{
+		return;
+	}
+
+	if (m_pEntity == nullptr)
+	{
+		return;
+	}
+
 	Rectangle vDest{ m_pEntity->GetPos().x, m_pEntity->GetPos().y, m_vSize.x, m_vSize.y };
 
 	CRenderEngine::GetInstance()->SetCurrentBlendMode(m_eBlendMode);
+	{
+		
+	}
 	DrawTextureProUV(*m_pTexture, m_vUVs, vDest, m_vPivot, m_pEntity->GetRot(), m_vColor);
 }
 

@@ -1,6 +1,9 @@
 #include "Action.h"
 #include "Render/RenderEngine.h"
 
+#include <fstream>
+#include <sstream>
+
 
 
 CAction::CAction() 
@@ -15,19 +18,54 @@ CAction::CAction(const pugi::xml_node& oRoot)
 	GET_VARIABLE_VALUE(uint, m_uPriority, uPriority, 0);
 	GET_VARIABLE_VALUE(string, m_sNextAction, sNextAction, "");
 	GET_VARIABLE_VALUE_WITH_ERROR(string, m_sTexturePath, sTexturePath, "", "Action has no TexturePath. -_-");
+	
 	if (pugi::xml_node oNode = oRoot.find_child([](const pugi::xml_node& _oNode) { return strcmp(_oNode.name(), "sTexturePath") == 0; })) {
-		if (pugi::xml_attribute oValue = oNode.attribute("value")) {
+		if (pugi::xml_attribute oValue = oNode.attribute("value")) 
+		{
 			m_sTexturePath = oValue.as_string();
 		}
-		else {
-			m_sTexturePath = ""; TraceLog(LOG_ERROR, "Action has no TexturePath. -_-");
+		else 
+		{
+			m_sTexturePath = ""; 
+			TraceLog(LOG_ERROR, "Action has no TexturePath.");
 		}
 	}
-	else {
-		m_sTexturePath = ""; TraceLog(LOG_ERROR, "Action has no TexturePath. -_-");
-	};	GET_VARIABLE_COLLECTION(m_tFrames, tFrames);
+	else 
+	{
+		m_sTexturePath = ""; 
+		TraceLog(LOG_ERROR, "Action has no TexturePath.");
+	};	
+	
+	std::string sOnActionFinished;
+	GET_VARIABLE_VALUE(string, sOnActionFinished, eOnActionFinished, "ToDefault");
+
+	if (sOnActionFinished == "ToDefault")
+	{
+		m_eOnActionFinished = EOnActionFinished::ToDefault;
+	}
+	else if (sOnActionFinished == "ToAction")
+	{
+		m_eOnActionFinished = EOnActionFinished::ToAction;
+	}
+	else if (sOnActionFinished == "Freeze")
+	{
+		m_eOnActionFinished = EOnActionFinished::Freeze;
+	}
+	else if (sOnActionFinished == "Loop")
+	{
+		m_eOnActionFinished = EOnActionFinished::Loop;
+	}
+	else
+	{
+		m_eOnActionFinished = EOnActionFinished::ToDefault;
+
+		TraceLog(LOG_WARNING, "Unknown eOnActionFinished value");
+	}
+
+	GET_VARIABLE_COLLECTION(m_tFrames, tFrames);
 
 	m_fDuration = 0;
+
 	for (SFrame& oFrame : m_tFrames)
 	{
 		m_fDuration += oFrame.fDuration;
@@ -37,6 +75,7 @@ CAction::CAction(const pugi::xml_node& oRoot)
 	{
 		m_pTexture = CRenderEngine::GetInstance()->LoadTexture2D(m_sTexturePath.c_str());
 	}
+	
 
 }
 
@@ -130,12 +169,15 @@ void CAction::Start(float _fStartTime)
 CAction::SUpdateResult CAction::Update(float _fTimeStep)
 {
 	SUpdateResult oUpdateResult;
+
 	float fNewTime = m_fCurrentTime + _fTimeStep;
 	
 	if (fNewTime >= m_fDuration - EPS_3)
 	{
-		oUpdateResult.bIsFinished = true;
 		float fExtraTime = fNewTime - m_fDuration;
+
+		oUpdateResult.fExtraTime = fExtraTime;
+		oUpdateResult.bIsFinished = true;
 
 		switch (m_eOnActionFinished)
 		{
@@ -143,22 +185,27 @@ CAction::SUpdateResult CAction::Update(float _fTimeStep)
 		{
 			oUpdateResult.fExtraTime = 0.f;
 			oUpdateResult.bIsFinished = m_fCurrentTime < m_fDuration - EPS_3 || m_bIsDirty ;
-			SetCurrentTimeClean(m_fDuration);
+			
+			SetCurrentTimeClean(fExtraTime);
+			
+			break;
 		}
-		break;
 		case Loop:
 		{
 			oUpdateResult.bIsFinished = false;
-			SetCurrentTimeClean(oUpdateResult.fExtraTime);
 			oUpdateResult.fExtraTime = 0.f;
+			
+			SetCurrentTimeClean(fExtraTime);
+			
+			break;
 		}
 		case ToDefault:
 		case ToAction:
 		default:
 		{
 			SetCurrentTimeClean(m_fDuration);
+			break;
 		}
-		break;
 		}
 	}
 	else

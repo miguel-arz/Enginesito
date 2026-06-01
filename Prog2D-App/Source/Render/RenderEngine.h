@@ -7,6 +7,7 @@
 #include "Prog2D-Raylib/raylib.h"
 #include "Prog2D-Raylib/raymath.h"
 #include <string>
+#include <list>
 
 
 //class CSpriteRendererComponent;
@@ -24,12 +25,12 @@ public:
 		~STextureData();
 
 		std::string sFilePath;
-		Texture2D* oTexture;
-		unsigned int uNumReferences;
+		Texture2D oTexture{};
+		unsigned int uNumReferences	= 0u;
 	};
 
 
-	typedef std::vector<STextureData> TTextureDatas;
+	typedef std::list<STextureData> TTextureDatas;
 	typedef std::vector<IRenderItem*> TRenderItems;
 
 	void InitializeRenderer(int _iScreenWidht, int _iScreenHeight, const char* _sName);

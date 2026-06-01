@@ -82,19 +82,16 @@ void CLevel::Configure()
 
 void CLevel::Delete()
 {
-	// Prevents RemoveEntity from breaking entities iteration
 	m_bCanRemoveEntities = false;
 
 	for (CEntity* pEntity : m_tEntities)
 	{
-		pEntity->Delete();
-
 		delete pEntity;
-		pEntity = nullptr;
 	}
 
-	m_bCanRemoveEntities = true;
 	m_tEntities.clear();
+
+	m_bCanRemoveEntities = true;
 }
 
 void CLevel::BeginPlay()

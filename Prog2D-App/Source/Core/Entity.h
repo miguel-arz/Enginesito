@@ -123,7 +123,7 @@ private:
 	float m_fRot = 0.f;
 	std::string m_sName;
 
-	CLevel* m_pEntityLevel;
+	CLevel* m_pEntityLevel = nullptr;
 
 };
 

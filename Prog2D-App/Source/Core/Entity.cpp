@@ -13,16 +13,7 @@ CEntity::CEntity()
 
 CEntity::~CEntity()
 {
-	for (CComponent* pComp : m_tComponents)
-	{
-		if (pComp)
-		{
-			pComp->Delete();
-			delete(pComp);
-		}
-	}
-
-	m_tComponents.clear();
+	Delete();
 }
 
 void CEntity::Configure()
@@ -115,8 +106,5 @@ void CEntity::Delete()
 		}
 	}
 	m_tComponents.clear();
-	if (m_pEntityLevel)
-	{
-		m_pEntityLevel->RemoveEntity(this);
-	}
+	m_pEntityLevel = nullptr;
 }

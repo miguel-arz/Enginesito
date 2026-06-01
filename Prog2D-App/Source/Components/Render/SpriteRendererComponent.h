@@ -62,13 +62,15 @@ public:
 
 protected:
 private:
-	Color m_vColor;
-	BlendMode m_eBlendMode;
-	Texture2D* m_pTexture;
-	Vector4 m_vUVs;
-	Vector2 m_vSize;
-	Vector2 m_vPivot;
-	unsigned int m_uLayer;
+	Color m_vColor{ WHITE };
+	BlendMode m_eBlendMode{ BLEND_ALPHA };
+	Texture2D* m_pTexture{ nullptr };
+
+	Vector4 m_vUVs{ 0.f, 0.f, 1.f, 1.f };
+	Vector2 m_vSize{ 0.f, 0.f };
+	Vector2 m_vPivot{ 0.f, 0.f };
+
+	unsigned int m_uLayer{ 0u };
 	std::string m_sPath;
 
 };

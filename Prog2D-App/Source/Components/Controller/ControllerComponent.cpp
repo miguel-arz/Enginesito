@@ -62,6 +62,7 @@ void CControllerComponent::PrePhyshics(float _fDeltaTime)
 	if (Vector2Length(vMove) < EPS_3)
 	{
 		const std::string& sAction = m_pAnimComponent->GetCurrentAction()->GetActionName();
+
 		if (sAction != "idle")
 		{
 			m_pAnimComponent->StartAction("idle");
@@ -86,7 +87,7 @@ void CControllerComponent::PrePhyshics(float _fDeltaTime)
 	}
 	else if (vMove.y >= EPS_3)
 	{
-		 pNextAction = "walk_down";
+		pNextAction = "walk_down";
 	}
 	else
 	{

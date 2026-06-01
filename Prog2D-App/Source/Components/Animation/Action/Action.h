@@ -97,7 +97,7 @@ private:
 	std::string m_sActionName{};
 	std::vector<SFrame> m_tFrames{};
 	unsigned int m_uPriority{ 0 };
-	EOnActionFinished m_eOnActionFinished;
+	EOnActionFinished m_eOnActionFinished{ EOnActionFinished::ToDefault };
 	std::string m_sNextAction{};
 	std::string m_sTexturePath{};
 	Texture* m_pTexture{};

@@ -1,15 +1,15 @@
 <CAction>
-	<sActionName Value="walk_up" />
-	<uPriority Value="0" />
-	<eOnActionFinished Value="Loop" />
-	<sNextAction Value="" />
-	<sTexturePath Value="resources/orkito/textures/U_Walk.png" />
+	<sActionName value="walk_up" />
+	<uPriority value="0" />
+	<eOnActionFinished value="Loop" />
+	<sNextAction value="" />
+	<sTexturePath value="resources/orkito/textures/U_Walk.png" />
 	<tFrames>
-		<SFrames fDuration="0.2" fU1="0.0" fV1="0.0" fU2="0.16667" fV2="1.0" />
-		<SFrames fDuration="0.2" fU1="0.0" fV1="0.0" fU2="0.3334" fV2="1.0" />
-		<SFrames fDuration="0.2" fU1="0.0" fV1="0.0" fU2="0.5" fV2="1.0" />
-		<SFrames fDuration="0.2" fU1="0.0" fV1="0.0" fU2="0.66667" fV2="1.0" />
-		<SFrames fDuration="0.2" fU1="0.0" fV1="0.0" fU2="0.8334" fV2="1.0" />
-		<SFrames fDuration="0.2" fU1="0.0" fV1="0.0" fU2="1.0" fV2="1.0" />
+		<SFrames fDuration="0.2" fU1="0.0" fV1="0.0" fU2="0.1666667" fV2="1.0" />
+    		<SFrames fDuration="0.2" fU1="0.1666667" fV1="0.0" fU2="0.3333333" fV2="1.0" />
+   		<SFrames fDuration="0.2" fU1="0.3333333" fV1="0.0" fU2="0.5" fV2="1.0" />
+    		<SFrames fDuration="0.2" fU1="0.5" fV1="0.0" fU2="0.6666667" fV2="1.0" />
+    		<SFrames fDuration="0.2" fU1="0.6666667" fV1="0.0" fU2="0.8333333" fV2="1.0" />
+    		<SFrames fDuration="0.2" fU1="0.8333333" fV1="0.0" fU2="1.0" fV2="1.0" />
 	</tFrames>
 </CAction>

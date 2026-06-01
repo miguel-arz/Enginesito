@@ -10,7 +10,7 @@
             <uLayer value="0" />
             <sTexturePath value="resources/maps/textures/background.png" />
         </CComponent>
-        <CComponent sType="TilemapRendererComponent">
+        <CComponent sType="TileMapRendererComponent">
             <sMapPath value="resources/maps/map.lv" />
             <uLayer value="10" />
         </CComponent>

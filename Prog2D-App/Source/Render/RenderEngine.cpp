@@ -7,13 +7,17 @@
 
 CRenderEngine::STextureData::STextureData(Image& _rImage) 
 {
-	oTexture = new Texture2D (LoadTextureFromImage(_rImage));
+	oTexture = LoadTextureFromImage(_rImage);
+	uNumReferences = 1u;
 }
 
 CRenderEngine::STextureData::~STextureData()
 {
-
-	/*UnloadTexture(oTexture);*/
+	if (oTexture.id != 0)
+	{
+		UnloadTexture(oTexture);
+		oTexture.id = 0;
+	}
 }
 
 void CRenderEngine::InitializeRenderer(int _iScreenWidht, int _iScreenHeight, const char* _sName)
@@ -23,8 +27,6 @@ void CRenderEngine::InitializeRenderer(int _iScreenWidht, int _iScreenHeight, co
 	m_sTitle = _sName;
 
 	InitWindow(_iScreenWidht, _iScreenHeight, _sName);
-
-	m_tTextureDatas.reserve(256u);
 
 	m_bIsLayerDirty = false;
 }
@@ -57,17 +59,15 @@ void CRenderEngine::Draw()
 	EndDrawing();
 
 	TTextureDatas::iterator it = m_tTextureDatas.begin();
-	unsigned int uFirstValidIndex = 0u;
+
 	while (it != m_tTextureDatas.end())
 	{
 		if (it->uNumReferences == 0u)
 		{
-			m_tTextureDatas.erase(it);
-			it = m_tTextureDatas.begin() + uFirstValidIndex;
+			it = m_tTextureDatas.erase(it);
 		}
 		else
 		{
-			++uFirstValidIndex;
 			++it;
 		}
 	}
@@ -111,33 +111,38 @@ void CRenderEngine::RemoveRenderer(IRenderItem* _pRenderItem)
 
 Texture2D* CRenderEngine::LoadTexture2D(const std::string& _sFilePath)
 {
-	Texture* pTexture = nullptr;
-
 	for (STextureData& rData : m_tTextureDatas)
 	{
 		if (_sFilePath == rData.sFilePath)
 		{
-			pTexture = rData.oTexture;
 
 			++rData.uNumReferences;
+			return &rData.oTexture;	
 		}
 	}
 
-	if (!pTexture)
+	Image oImage = LoadImage(_sFilePath.c_str());
+
+	if (oImage.data == nullptr)
 	{
-		Image oImage = LoadImage(_sFilePath.c_str());
-		pTexture = LoadTexture2D(oImage);
-		UnloadImage(oImage);
-		m_tTextureDatas[m_tTextureDatas.size() - 1u].sFilePath = _sFilePath; 
+		TraceLog(LOG_ERROR, "Cant load image: %s", _sFilePath.c_str());
+		return nullptr;
 	}
 
-	return pTexture;
+	m_tTextureDatas.emplace_back(oImage);
+
+	STextureData& rNewData = m_tTextureDatas.back();
+	rNewData.sFilePath = _sFilePath;
+
+	UnloadImage(oImage);
+
+	return &rNewData.oTexture;
 }
 
 Texture2D* CRenderEngine::LoadTexture2D(Image& _rImage)
 {
 	m_tTextureDatas.emplace_back(_rImage);
-	return m_tTextureDatas[m_tTextureDatas.size() - 1u].oTexture;
+	return &m_tTextureDatas.back().oTexture;
 }
 
 Texture2D* CRenderEngine::LoadTexture2D(Texture2D* _pTexture)
@@ -149,10 +154,10 @@ Texture2D* CRenderEngine::LoadTexture2D(Texture2D* _pTexture)
 
 	for (STextureData& rData : m_tTextureDatas)
 	{
-		if (rData.oTexture->id == _pTexture->id)
+		if (rData.oTexture.id == _pTexture->id)
 		{
 			++rData.uNumReferences;
-			break;
+			return &rData.oTexture;
 		}
 	}
 	return _pTexture;
@@ -164,7 +169,7 @@ void CRenderEngine::UnloadTexture2D(Texture* _pTexture)
 
 	for (;it != m_tTextureDatas.end(); ++it)
 	{
-		if (it->oTexture == _pTexture)
+		if (&it->oTexture == _pTexture)
 		{
 			if (it->uNumReferences > 0u)
 			{
@@ -183,7 +188,7 @@ void CRenderEngine::UnloadTexture2D(unsigned int _uTextureId)
 
 	for (;it != m_tTextureDatas.end(); ++it)
 	{
-		if (it->oTexture->id == _uTextureId)
+		if (it->oTexture. id == _uTextureId)
 		{
 			if (it->uNumReferences > 0u)
 			{
